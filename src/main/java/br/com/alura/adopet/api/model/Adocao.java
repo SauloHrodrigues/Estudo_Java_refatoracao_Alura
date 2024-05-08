@@ -15,33 +15,30 @@ public class Adocao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Long id;
 
-    @Column(name = "data")
     private LocalDateTime data;
 
 //    @NotNull
     @ManyToOne
-    @JsonBackReference("tutor_adocoes")
-    @JoinColumn(name = "tutor_id")
+//    @JsonBackReference("tutor_adocoes") // não é preciso, pois não é mais usada diretamente na dto.
     private Tutor tutor;
 
 //    @NotNull
     @OneToOne
-    @JoinColumn(name = "pet_id")
-    @JsonManagedReference("adocao_pets")
+//    @JoinColumn(name = "pet_id") // já é por convenção
+//    @JsonManagedReference("adocao_pets") // não é preciso, pois não é mais usada diretamente na dto.
     private Pet pet;
 
 //    @NotBlank
-    @Column(name = "motivo")
+//    @Column(name = "motivo") // Já é o nome do atributo por convenção
     private String motivo;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private StatusAdocao status;
 
-    @Column(name = "justificativa_status")
+//    @Column(name = "justificativa_status")// já é por convenção
     private String justificativaStatus;
 
     @Override
