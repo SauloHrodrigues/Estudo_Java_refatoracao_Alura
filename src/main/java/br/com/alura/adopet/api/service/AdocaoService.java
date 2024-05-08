@@ -3,7 +3,6 @@ package br.com.alura.adopet.api.service;
 import br.com.alura.adopet.api.dto.adocao.AprovacaoAdocaoDto;
 import br.com.alura.adopet.api.dto.adocao.ReprovacaoAdocaoDto;
 import br.com.alura.adopet.api.dto.adocao.SolicitacaoAdocaoDto;
-import br.com.alura.adopet.api.exception.ValidacaoExcepition;
 import br.com.alura.adopet.api.model.Adocao;
 import br.com.alura.adopet.api.model.Pet;
 import br.com.alura.adopet.api.model.StatusAdocao;
@@ -11,6 +10,7 @@ import br.com.alura.adopet.api.model.Tutor;
 import br.com.alura.adopet.api.repository.AdocaoRepository;
 import br.com.alura.adopet.api.repository.PetRepository;
 import br.com.alura.adopet.api.repository.TutorRepository;
+import br.com.alura.adopet.api.service.validacoes.ValidacoesSolicitarAdocao;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
@@ -28,48 +28,21 @@ public class AdocaoService {
     @Autowired
     private EmailSevice emailSevice;
 
+    @Autowired
+    private List<ValidacoesSolicitarAdocao> listDeValidardores;
+
     public void solicitar(SolicitacaoAdocaoDto dto){
+
         Pet pet= petRepository.getReferenceById(dto.idPet());
         Tutor tutor = tutorRepository.getReferenceById(dto.idTutor());
 
-//        if (adocao.getPet().getAdotado() == true) { 3:59
         /*
-//                     PRIMEIRA REGRA  - PET DISPONIVEL?
-        if (pet.getAdotado() == true) {
-            throw new ValidacaoExcepition("Pet já foi adotado!");
-//            return ResponseEntity.badRequest().body("Pet já foi adotado!");
-        } */
+        for(ValidacoesSolicitarAdocao v :listDeValidardores){
+            v.validar(dto);
+        } OU    */
 
-//        else {
-//            List<Adocao> adocoes = adocaoRepository.findAll();
-//            for (Adocao a : adocoes) {
+        listDeValidardores.forEach(v -> v.validar(dto));
 
-//          SEGUNDA VALIDAÇÃO
-//                if (a.getTutor() == tutor && a.getStatus() == StatusAdocao.AGUARDANDO_AVALIACAO) {
-//                    throw new ValidacaoExcepition("Tutor já possui outra adoção aguardando avaliação!");
-////                    return ResponseEntity.badRequest().body("Tutor já possui outra adoção aguardando avaliação!");
-//                }
-//            }
-//        TERCEIRA AVALIAÇÃO
-//            for (Adocao a : adocoes) {
-//                if (a.getPet() == pet && a.getStatus() == StatusAdocao.AGUARDANDO_AVALIACAO) {
-//                    throw new ValidacaoExcepition("Pet já está aguardando avaliação para ser adotado!");
-////                    return ResponseEntity.badRequest().body("Pet já está aguardando avaliação para ser adotado!");
-//                }
-//            }
-
-//        QUARTA AVALIACAO - APENAS 5 PETS
-//            for (Adocao a : adocoes) {
-//                int contador = 0;
-//                if (a.getTutor() == tutor && a.getStatus() == StatusAdocao.APROVADO) {
-//                    contador = contador + 1;
-//                }
-//                if (contador == 5) {
-//                    throw new ValidacaoExcepition("Tutor chegou ao limite máximo de 5 adoções!");
-////                    return ResponseEntity.badRequest().body("Tutor chegou ao limite máximo de 5 adoções!");
-//                }
-//            }
-//        }
         Adocao adocao = new Adocao();
         adocao.setData(LocalDateTime.now());
         adocao.setStatus(StatusAdocao.AGUARDANDO_AVALIACAO);
