@@ -33,34 +33,43 @@ public class AdocaoService {
         Tutor tutor = tutorRepository.getReferenceById(dto.idTutor());
 
 //        if (adocao.getPet().getAdotado() == true) { 3:59
+        /*
+//                     PRIMEIRA REGRA  - PET DISPONIVEL?
         if (pet.getAdotado() == true) {
             throw new ValidacaoExcepition("Pet já foi adotado!");
 //            return ResponseEntity.badRequest().body("Pet já foi adotado!");
-        } else {
-            List<Adocao> adocoes = adocaoRepository.findAll();
-            for (Adocao a : adocoes) {
-                if (a.getTutor() == tutor && a.getStatus() == StatusAdocao.AGUARDANDO_AVALIACAO) {
-                    throw new ValidacaoExcepition("Tutor já possui outra adoção aguardando avaliação!");
-//                    return ResponseEntity.badRequest().body("Tutor já possui outra adoção aguardando avaliação!");
-                }
-            }
-            for (Adocao a : adocoes) {
-                if (a.getPet() == pet && a.getStatus() == StatusAdocao.AGUARDANDO_AVALIACAO) {
-                    throw new ValidacaoExcepition("Pet já está aguardando avaliação para ser adotado!");
-//                    return ResponseEntity.badRequest().body("Pet já está aguardando avaliação para ser adotado!");
-                }
-            }
-            for (Adocao a : adocoes) {
-                int contador = 0;
-                if (a.getTutor() == tutor && a.getStatus() == StatusAdocao.APROVADO) {
-                    contador = contador + 1;
-                }
-                if (contador == 5) {
-                    throw new ValidacaoExcepition("Tutor chegou ao limite máximo de 5 adoções!");
-//                    return ResponseEntity.badRequest().body("Tutor chegou ao limite máximo de 5 adoções!");
-                }
-            }
-        }
+        } */
+
+//        else {
+//            List<Adocao> adocoes = adocaoRepository.findAll();
+//            for (Adocao a : adocoes) {
+
+//          SEGUNDA VALIDAÇÃO
+//                if (a.getTutor() == tutor && a.getStatus() == StatusAdocao.AGUARDANDO_AVALIACAO) {
+//                    throw new ValidacaoExcepition("Tutor já possui outra adoção aguardando avaliação!");
+////                    return ResponseEntity.badRequest().body("Tutor já possui outra adoção aguardando avaliação!");
+//                }
+//            }
+//        TERCEIRA AVALIAÇÃO
+//            for (Adocao a : adocoes) {
+//                if (a.getPet() == pet && a.getStatus() == StatusAdocao.AGUARDANDO_AVALIACAO) {
+//                    throw new ValidacaoExcepition("Pet já está aguardando avaliação para ser adotado!");
+////                    return ResponseEntity.badRequest().body("Pet já está aguardando avaliação para ser adotado!");
+//                }
+//            }
+
+//        QUARTA AVALIACAO - APENAS 5 PETS
+//            for (Adocao a : adocoes) {
+//                int contador = 0;
+//                if (a.getTutor() == tutor && a.getStatus() == StatusAdocao.APROVADO) {
+//                    contador = contador + 1;
+//                }
+//                if (contador == 5) {
+//                    throw new ValidacaoExcepition("Tutor chegou ao limite máximo de 5 adoções!");
+////                    return ResponseEntity.badRequest().body("Tutor chegou ao limite máximo de 5 adoções!");
+//                }
+//            }
+//        }
         Adocao adocao = new Adocao();
         adocao.setData(LocalDateTime.now());
         adocao.setStatus(StatusAdocao.AGUARDANDO_AVALIACAO);
