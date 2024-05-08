@@ -21,19 +21,19 @@ public class Adocao {
     @Column(name = "data")
     private LocalDateTime data;
 
-    @NotNull
+//    @NotNull
     @ManyToOne
     @JsonBackReference("tutor_adocoes")
     @JoinColumn(name = "tutor_id")
     private Tutor tutor;
 
-    @NotNull
+//    @NotNull
     @OneToOne
     @JoinColumn(name = "pet_id")
     @JsonManagedReference("adocao_pets")
     private Pet pet;
 
-    @NotBlank
+//    @NotBlank
     @Column(name = "motivo")
     private String motivo;
 

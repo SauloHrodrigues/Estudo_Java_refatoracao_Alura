@@ -23,7 +23,7 @@ public class AdocaoService {
     @Autowired
     private PetRepository petRepository;
 
-    private TutorRepository tutorRepository
+    private TutorRepository tutorRepository;
 
     @Autowired
     private EmailSevice emailSevice;
@@ -97,7 +97,7 @@ public class AdocaoService {
                         adocao.getPet().getNome() + ", solicitada em " +
                         adocao.getData().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")) +
                         ", foi reprovada pelo abrigo " + adocao.getPet().getAbrigo().getNome() +
-                        " com a seguinte justificativa: " + adocao.getJustificativaStatus());//#!$@Ulo1978
+                        " com a seguinte justificativa: " + adocao.getJustificativaStatus());
 
     }
 }
