@@ -33,6 +33,7 @@ public class Tutor {
     private String email;
 
     @OneToMany(mappedBy = "tutor", fetch = FetchType.EAGER)
+    /* O telacionamento *ToMany o padrão de FetchType é LAZE*/
     @JsonManagedReference("tutor_adocoes")
     private List<Adocao> adocoes;
 

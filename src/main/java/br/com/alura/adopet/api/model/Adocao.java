@@ -19,26 +19,31 @@ public class Adocao {
 
     private LocalDateTime data;
 
-//    @NotNull
-    @ManyToOne
+    //    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY) //
 //    @JsonBackReference("tutor_adocoes") // não é preciso, pois não é mais usada diretamente na dto.
     private Tutor tutor;
 
 //    @NotNull
-    @OneToOne
-//    @JoinColumn(name = "pet_id") // já é por convenção
-//    @JsonManagedReference("adocao_pets") // não é preciso, pois não é mais usada diretamente na dto.
-    private Pet pet;
 
-//    @NotBlank
+    //    @NotBlank
 //    @Column(name = "motivo") // Já é o nome do atributo por convenção
+
+    //    @JoinColumn(name = "pet_id") // já é por convenção
+//    @JsonManagedReference("adocao_pets") // não é preciso, pois não é mais usada diretamente na dto.
+    @OneToOne(fetch = FetchType.LAZY) /*
+            Sempre que houver um relacionamente *ToOne, o relacionamento é carregado
+             a reboque na JPA, pois por padrão o carregamnto é EAGER. usando o LAZY, somente
+             sera carrregado se for usado.
+             */
+    private Pet pet;
     private String motivo;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "status")
+//    @Column(name = "status")
     private StatusAdocao status;
 
-//    @Column(name = "justificativa_status")// já é por convenção
+    //    @Column(name = "justificativa_status")// já é por convenção
     private String justificativaStatus;
 
     @Override
